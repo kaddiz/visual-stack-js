@@ -1,22 +1,26 @@
 
 export default class Stack {
   constructor(stack) {
+    this.size = 0
+    this.head = null
+    this.pointer = null
     if (typeof stack === typeof this) {
       this.copy(stack)
-    } else {
-      this.size = 0
-      this.head = null
-    }
-    this.pointer = null
+    } 
   }
 
   push(item) {
-    var node = {
-      value: item,
-      next: this.head
+    if (this.size + 1 <= 10) {
+      var node = {
+        value: item,
+        next: this.head
+      }
+      this.head = node
+      this.size++
+      return true
+    } else {
+      return false
     }
-    this.head = node
-    this.size++
   }
 
   pop() {
@@ -38,24 +42,21 @@ export default class Stack {
   }
 
   similar(stack) {
-    if (typeof this === typeof stack) {
-      var result = false
-      if (this.size !== stack.size) return false
-      if (this.head !== stack.head) return false
-      if (this.size === stack.size) {        
-        var body = this.head.next, item = stack.head.next
-        if (body !== item) return false
-        while (item !== null || body !== null) {
-          if (body !== item) return false
-          body = body.next
-          item = item.next
-        }
-        return true
-      } else {
-        return false
-      }
+    if (typeof this != typeof stack) {
+      return false      
     } else {
-      return false
+      if (this.isEmpty() && stack.isEmpty()) return true
+      if (this.size !== stack.size) return false
+      if (this.head.value !== stack.head.value) return false
+      if (this.head.next === null && stack.head.next !== null) return false
+      if (this.head.next !== null && stack.head.next === null) return false
+      var body = this.head.next, item = stack.head.next
+      while (body !== null) {
+        if (body.value !== item.value) return false
+        body = body.next
+        item = item.next
+      } 
+      return true
     }
   }
 
@@ -65,7 +66,7 @@ export default class Stack {
       this.head = stack.head
       if (this.size > 0) {        
         var body = this.head.next, item = stack.head.next
-        while (item !== null || body !== null) {
+        while (item !== null && body !== null) {
           body = item
           body = body.next
           item = item.next
@@ -76,6 +77,11 @@ export default class Stack {
 
   isEmpty() {
     return this.size === 0
+  }
+
+  clear() {
+    this.size = 0
+    this.head = null
   }
 
   resetPointer() {
