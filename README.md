@@ -1,1 +1,2 @@
-# visual-stack-js
+# Laboratory work 
+  Visual Stack
