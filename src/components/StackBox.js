@@ -7,8 +7,7 @@ export default class StackBox extends React.Component {
   }
 
   state = {
-    data: '',
-    poped: ''
+    data: ''
   }
 
   pushClick(e) {
@@ -19,9 +18,6 @@ export default class StackBox extends React.Component {
   }
   popClick(e) {
     var item = this.props.stack.pop()
-    this.setState({
-      poped: item
-    })
     this.props.changeStack(e)
   }
   copyClick(e) {
@@ -50,8 +46,6 @@ export default class StackBox extends React.Component {
     return <div class='stack-box'>
       <div class='stack-box__state'>
         Size: <span>{items.length}</span>
-        <br />
-        {(this.state.poped !== '' && this.state.poped !== null) ? `Pop: ${this.state.poped}` : ''}
       </div>
       <ul class='stack-box__stack'>{
         items.map((item, index) => {
