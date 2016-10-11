@@ -24,6 +24,10 @@ export default class StackBox extends React.Component {
     })
     this.props.changeStack(e)
   }
+  copyClick(e) {
+    this.props.copy()
+    this.props.changeStack(e)
+  }
   clearClick(e) {
     this.props.stack.clear()
     this.props.changeStack(e)
@@ -58,6 +62,7 @@ export default class StackBox extends React.Component {
         <input name='item' type='number' onChange={::this.changeInput} value={this.state.data} />
         <button class='button push' onClick={::this.pushClick}>Push</button>
         <button class='button push' onClick={::this.popClick}>Pop</button>
+        <button class='button push' onClick={::this.copyClick}>Copy</button>
         <button class='button' onClick={::this.clearClick}>Clear</button>
       </div>
     </div>
