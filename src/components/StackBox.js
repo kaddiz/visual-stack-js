@@ -50,7 +50,7 @@ export default class StackBox extends React.Component {
       </div>
       <ul class='stack-box__stack'>{
         items.map((item, index) => {
-          return <li key={Math.random()}>{item}</li>
+          return <li key={index}>{item}</li>
         })
       }</ul>
       <div class='stack-box__buttons'>
