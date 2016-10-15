@@ -38,7 +38,10 @@ export default class Stack {
   }
 
   equal(stack) {
-    return this === stack
+    if (typeof this === typeof stack)
+      return this === stack 
+    else 
+      return false
   }
 
   similar(stack) {
@@ -50,11 +53,11 @@ export default class Stack {
       if (this.head.value !== stack.head.value) return false
       if (this.head.next === null && stack.head.next !== null) return false
       if (this.head.next !== null && stack.head.next === null) return false
-      var body = this.head.next, item = stack.head.next
-      while (body !== null) {
-        if (body.value !== item.value) return false
-        body = body.next
-        item = item.next
+      var _this = this.head.next, _stack = stack.head.next
+      while (_this !== null) {
+        if (_this.value !== _stack.value) return false
+        _this = _this.next
+        _stack = _stack.next
       } 
       return true
     }

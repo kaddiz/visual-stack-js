@@ -1,20 +1,18 @@
 import React from 'react'
 
 export default class StackBox extends React.Component {
-  constructor() {
-    super()
-    this.stoped = false
-  }
-
   state = {
     data: ''
   }
 
   pushClick(e) {
     if (this.state.data !== '') {
-      this.stoped = this.props.stack.push(this.state.data)
+      this.props.stack.push(this.state.data)
+      this.setState({
+        data: ''
+      })
+      this.props.changeStack(e) 
     }
-    this.props.changeStack(e)
   }
   popClick(e) {
     var item = this.props.stack.pop()
@@ -33,6 +31,9 @@ export default class StackBox extends React.Component {
       data: e.target.value 
     })
   }
+  enterKeyUp(e) {
+    if (e.keyCode === 13) ::this.pushClick()
+  }
 
   render() {
     var stack = this.props.stack
@@ -45,19 +46,19 @@ export default class StackBox extends React.Component {
     }
     return <div class='stack-box'>
       <div class='stack-box__state'>
-        Size: <span>{items.length}</span>
+        S i z e : <span>{items.length}</span>
       </div>
       <ul class='stack-box__stack'>{
         items.map((item, index) => {
-          return <li class={index === 0 && this.stoped ? 'item' : ''} key={Math.random()}>{item}</li>
+          return <li key={Math.random()}>{item}</li>
         })
       }</ul>
       <div class='stack-box__buttons'>
-        <input name='item' type='number' onChange={::this.changeInput} value={this.state.data} />
-        <button class='button push' onClick={::this.pushClick}>Push</button>
-        <button class='button push' onClick={::this.popClick}>Pop</button>
-        <button class='button push' onClick={::this.copyClick}>Copy</button>
-        <button class='button' onClick={::this.clearClick}>Clear</button>
+        <input name='stack-item' type='text' onKeyUp={::this.enterKeyUp} onChange={::this.changeInput} value={this.state.data} required />
+        <button class='button push' onClick={::this.pushClick}>P u s h</button>
+        <button class='button push' onClick={::this.popClick}>P o p</button>
+        <button class='button push' onClick={::this.copyClick}>C o p y</button>
+        <button class='button' onClick={::this.clearClick}>C l e a r</button>
       </div>
     </div>
   }

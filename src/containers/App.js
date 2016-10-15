@@ -34,8 +34,8 @@ export default class App extends React.Component {
       </header>
       <main>
         <StackBox changeStack={::this.changeStack} copy={::this.copyLeftToRight} stack={this.state.left} />
-        <div class='similar'>Similar: {
-          (this.state.left.similar(this.state.right)) ? <span>YES</span> : <span>NO</span>
+        <div class='similar'>S i m i l a r : {
+          (this.state.left.similar(this.state.right)) ? <span>Y E S</span> : <span>N O</span>
         }</div>
         <StackBox changeStack={::this.changeStack} copy={::this.copyRightToLeft} stack={this.state.right} />
       </main>
